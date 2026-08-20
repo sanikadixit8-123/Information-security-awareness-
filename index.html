@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can You Spot When You're Being Attacked?</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Animated Background Canvas -->
+  <canvas id="cyber-bg"></canvas>
+
+  <div class="app-container">
+    
+    <!-- Page 1: Landing Page -->
+    <section id="welcome-screen" class="card-screen">
+      <div class="brand-header">
+        <span class="security-badge">CYBER SAFETY QUIZ</span>
+        <h1>Can you spot when you’re being attacked?</h1>
+        <p class="intro-text">
+          Cyber threats attempt to trick unsuspecting users into revealing personal or financial information, often by mimicking content from well-known, trusted companies.
+        </p>
+        <p class="intro-text">
+          AI is already making these attacks more sophisticated, personalised, and common.
+        </p>
+        <p class="intro-text highlight-text">
+          Think you can tell what's real or fake?
+        </p>
+      </div>
+
+      <form id="user-form" onsubmit="startQuiz(event)">
+        <div class="form-group">
+          <label for="username">Your Name</label>
+          <input type="text" id="username" placeholder="e.g. Alex Morgan" required>
+        </div>
+        <div class="form-group">
+          <label for="useremail">Your Email Address</label>
+          <input type="email" id="useremail" placeholder="e.g. alex@example.com" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Take a Quiz →</button>
+      </form>
+    </section>
+
+    <!-- Quiz Screen (Pages 2 to 11: 10 Scenarios) -->
+    <section id="training-screen" class="card-screen hidden">
+      <header class="quiz-nav">
+        <div class="attack-tag" id="attack-category-tag">ATTACK TYPE 1 OF 10</div>
+        <div class="progress-info">
+          <span id="tracker-text">Page 1 of 10</span>
+          <div class="progress-bar-bg"><div id="progress-fill"></div></div>
+        </div>
+      </header>
+
+      <!-- Educational Box -->
+      <div class="concept-box">
+        <h3 id="attack-title">Scam Type Title</h3>
+        <p id="attack-description">Simple explanation of this scam...</p>
+      </div>
+
+      <!-- Email Simulator -->
+      <div class="email-container">
+        <div class="email-meta">
+          <h2 id="email-subject">Subject loading...</h2>
+          <div class="sender-row">
+            <div class="avatar" id="email-avatar">?</div>
+            <div class="sender-info">
+              <strong id="email-sender-name">Sender Name</strong>
+              <span id="email-sender-address">&lt;address@example.com&gt;</span>
+              <div class="recipient-line">To: <span id="email-recipient-display">you@example.com</span></div>
+            </div>
+            <span class="email-time">Today, 10:45 AM</span>
+          </div>
+        </div>
+
+        <div class="email-content" id="email-body-content">
+          <!-- Injected dynamically -->
+        </div>
+
+        <!-- Simulated Attachment (If Any) -->
+        <div id="attachment-wrapper" class="attachment-section hidden">
+          <div class="attachment-notice">ℹ️ Simulated File Attachment (Safe for training):</div>
+          <div class="attachment-card">
+            <span class="file-icon" id="file-icon-type">📄</span>
+            <div class="file-details">
+              <strong id="file-name">file.pdf.exe</strong>
+              <small id="file-size">1.2 MB</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hover Link Preview Bar -->
+        <div class="hover-bar">
+          Hover Link Destination: <span id="hover-url" class="url-highlight">https://...</span>
+        </div>
+      </div>
+
+      <!-- Action Choice -->
+      <div class="action-panel">
+        <p class="action-question">Is this email safe or a scam attack?</p>
+        <div class="btn-group">
+          <button class="btn btn-danger" onclick="submitAnswer(true)">🚨 Fake / Scam Attack</button>
+          <button class="btn btn-success" onclick="submitAnswer(false)">✅ Legitimate / Safe</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal-backdrop hidden">
+      <div class="modal-card">
+        <div id="feedback-badge" class="result-badge">CORRECT</div>
+        <h2 id="feedback-heading">Feedback Title</h2>
+        <p id="feedback-text">Simple feedback explanation...</p>
+        <div class="indicator-box">
+          <strong>Key Clue to Look For:</strong>
+          <p id="feedback-indicator">Clue description...</p>
+        </div>
+        <button class="btn btn-primary" onclick="nextScenario()">Next Page →</button>
+      </div>
+    </div>
+
+    <!-- Final Dashboard -->
+    <section id="dashboard-screen" class="card-screen hidden">
+      <div class="dashboard-header">
+        <span class="security-badge">QUIZ COMPLETED</span>
+        <h1>Your Cyber Safety Score</h1>
+        <p id="dashboard-user-greeting">Great job completing the test!</p>
+      </div>
+
+      <div class="score-summary-grid">
+        <div class="stat-card">
+          <span class="stat-value" id="final-score-val">0/10</span>
+          <span class="stat-label">Correct Answers</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="final-pct-val">0%</span>
+          <span class="stat-label">Accuracy Rate</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-value" id="final-grade-val">F</span>
+          <span class="stat-label">Safety Rating</span>
+        </div>
+      </div>
+
+      <div class="breakdown-container">
+        <h3>10-Page Breakdown</h3>
+        <div id="breakdown-list" class="breakdown-list">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <button class="btn btn-primary" onclick="location.reload()" style="margin-top: 24px;">Try Again ↺</button>
+    </section>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
